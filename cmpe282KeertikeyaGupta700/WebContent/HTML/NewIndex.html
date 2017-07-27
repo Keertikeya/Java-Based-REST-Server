@@ -1,0 +1,102 @@
+<!doctype html>
+<html>
+<head>
+    <title>CMPE-282-HW1-700</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="keertikeya gupta">
+</head>
+
+<body>
+	<h1>CMPE 282 HW 1</h1>
+	<h2><b>Stundet ID:</b> 010034700</h2>
+	<h2><b>Stundet Name:</b> Keertikeya Gupta</h2>
+	
+	<form method="get" id="frm">
+		<label><b>URL</b></label>
+		<input type="text" name="url" id="url" size = "100"/>
+
+		<br/>
+		
+		<p>Make sure URL contains proper path. E.g. <b>CMPE282KeertikeyaGupta700/rest/...</b></p>
+		
+		<br/>
+		
+		<label><b>HTTP Method</b></label>
+		<select name="method" id="method">
+			<option>GET </option>
+			<option>PUT </option>
+			<option>POST </option>
+			<option>DELETE </option>
+		</select>
+
+
+		<br/>
+
+
+		<div id="xml" style="display: none">
+			<p><b>XML Content</b></p>
+			<textarea rows="8" cols="50" name="content" id="ta"></textarea> <br/><br/>
+		</div>
+
+
+		
+
+		<input type="submit"value="Send" id="submit"/>
+	</form>
+
+	
+
+
+	<script type="text/javascript">
+		if(!sessionStorage.content){
+			document.getElementById("ta").value="";
+		}
+		else{
+			document.getElementById("ta").value=sessionStorage.content;
+		}
+		
+		document.getElementById("method").selectedIndex=sessionStorage.method;
+
+		if(document.getElementById("method").selectedIndex == 0 || document.getElementById("method").selectedIndex == 3){
+			document.getElementById("xml").style.display="none";
+		}
+		if(document.getElementById("method").selectedIndex == 1 || document.getElementById("method").selectedIndex == 2){
+			document.getElementById("xml").style.display="block";
+		}
+
+
+		document.getElementById("submit").onclick=function(){
+			textContent=document.getElementById("ta").value;
+			sessionStorage.setItem("method", document.getElementById("method").selectedIndex);
+			sessionStorage.setItem("content", document.getElementById("ta").value);
+
+
+			if(document.getElementById("url").value == ""){
+				alert("Please enter url");
+			}
+			else{
+				document.getElementById("frm").action="http://localhost:8080/DemoServlets/DemoServlet";
+			}
+		}
+		
+		
+		
+		
+		document.getElementById("method").onclick=function(){
+			if(document.getElementById("method").selectedIndex == 0 || document.getElementById("method").selectedIndex == 3){
+				document.getElementById("xml").style.display="none";
+			}
+			if(document.getElementById("method").selectedIndex == 1 || document.getElementById("method").selectedIndex == 2){
+				document.getElementById("xml").style.display="block";
+			}
+		}
+
+
+	</script>
+
+
+
+</body>
+</html>
